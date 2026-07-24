@@ -1,0 +1,46 @@
+/* Temporary bridges — delete when grep shows no old token usages outside toggle-freeze. */
+@theme {
+  --color-bg: var(--surface);
+  --color-bg-subtle: var(--surface-raised);
+  --color-bg-muted: var(--surface-overlay);
+  --color-bg-emphasis: var(--glass-highlight);
+
+  --color-fg: var(--foreground);
+  --color-fg-muted: var(--muted-foreground);
+  --color-fg-subtle: var(--muted);
+  --color-fg-faint: var(--muted);
+
+  /* Approximate old accent scale with sky singles / mixes */
+  --color-accent-50: color-mix(in oklch, var(--accent) 12%, white);
+  --color-accent-100: color-mix(in oklch, var(--accent) 20%, white);
+  --color-accent-200: color-mix(in oklch, var(--accent) 35%, white);
+  --color-accent-300: var(--accent-hover);
+  --color-accent-400: var(--accent);
+  --color-accent-500: var(--accent);
+  --color-accent-600: color-mix(in oklch, var(--accent) 85%, black);
+  --color-accent-700: color-mix(in oklch, var(--accent) 70%, black);
+  --color-accent-800: color-mix(in oklch, var(--accent) 55%, black);
+  --color-accent-950: color-mix(in oklch, var(--accent) 35%, black);
+
+  --color-destructive: var(--error);
+  --color-destructive-muted: var(--error-muted);
+
+  --color-success: var(--success);
+  --color-success-muted: var(--success-muted);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --duration-fast: 140ms;
+  --duration-normal: 200ms;
+}
+
+@layer components {
+  /* Non-games leftovers (StatCard, charts, etc.) until those callers migrate */
+  .surface {
+    @apply glass rounded-xl;
+  }
+
+  .surface-elevated {
+    @apply glass-strong rounded-xl;
+  }
+}

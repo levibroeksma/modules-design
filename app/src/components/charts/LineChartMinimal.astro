@@ -1,0 +1,33 @@
+---
+interface Props {
+  id?: string;
+  title?: string;
+  value?: string;
+  height?: number;
+  class?: string;
+}
+
+const {
+  id = "line-chart-minimal",
+  title = "API traffic",
+  value = "32.4k",
+  height = 64,
+  class: className = "",
+} = Astro.props;
+---
+
+<div class:list={["surface p-4 flex gap-4", className]}>
+  <div class="mb-2 flex flex-col items-baseline justify-between">
+    <p class="text-xs font-medium text-fg-subtle">{title}</p>
+    <p class="text-lg font-semibold tabular-nums">{value}</p>
+  </div>
+  <div class="chart-frame" style={`height: ${height}px`}>
+    <canvas
+      id={id}
+      data-chart="line-minimal"
+      data-height={height}
+      height={height}
+      role="img"
+      aria-label={`${title} sparkline`}></canvas>
+  </div>
+</div>

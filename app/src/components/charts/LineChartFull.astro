@@ -1,0 +1,29 @@
+---
+interface Props {
+  id?: string;
+  title?: string;
+  height?: number;
+  class?: string;
+}
+
+const {
+  id = "line-chart-full",
+  title = "Weekly requests",
+  height = 208,
+  class: className = "",
+} = Astro.props;
+---
+
+<div class:list={["surface p-4", className]}>
+  <p class="mb-3 text-xs font-medium text-fg-subtle">{title}</p>
+  <div class="chart-frame" style={`height: ${height}px`}>
+    <canvas
+      id={id}
+      data-chart="line-full"
+      data-height={height}
+      height={height}
+      role="img"
+      aria-label={title}
+    ></canvas>
+  </div>
+</div>

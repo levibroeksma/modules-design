@@ -1,0 +1,30 @@
+---
+interface Action {
+  label: string;
+  variant: "primary" | "secondary";
+}
+
+interface Props {
+  actions: Action[];
+}
+
+const { actions } = Astro.props;
+---
+
+<section class="mb-6">
+  <h2 class="mb-3 text-sm font-medium text-fg-muted">Quick actions</h2>
+  <div class="flex gap-2">
+    {
+      actions.map((action) => (
+        <button
+          class:list={[
+            "btn flex-1",
+            action.variant === "primary" ? "btn-primary" : "btn-secondary",
+          ]}
+        >
+          {action.label}
+        </button>
+      ))
+    }
+  </div>
+</section>

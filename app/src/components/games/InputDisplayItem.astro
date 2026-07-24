@@ -1,0 +1,19 @@
+---
+interface Props {
+  value: string;
+  class?: string;
+}
+
+const { value, class: className = "", ...rest } = Astro.props as Props &
+  Record<string, unknown>;
+---
+
+<span
+  class:list={[
+    "glass-strong w-full rounded-md p-2 text-center text-sm font-semibold tabular-nums",
+    className,
+  ]}
+  {...rest}
+>
+  {value}
+</span>

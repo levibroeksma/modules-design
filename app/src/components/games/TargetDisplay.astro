@@ -1,0 +1,39 @@
+---
+interface Props {
+  target: number;
+  score: number;
+  isTarget?: boolean;
+}
+const { target, score, isTarget = true } = Astro.props as Props;
+---
+
+{
+  /** TODO:
+   * Add checkout route tips based on configuration (if config.showRoutes && isTarget)
+   * Note: config not yet implemented, defered
+   */
+}
+<div class="px-3 flex-1 rounded-lg surface surface-raised">
+  <div
+    class="container h-full p-3 mx-auto flex-1 flex flex-col items-center justify-center rounded"
+  >
+    <h1 class="text-7xl font-display-mono font-bold tabular-nums">
+      {isTarget ? score : target}
+    </h1>
+    <span
+      class="text-sm text-fg-subtle uppercase font-display-mono tracking-wider"
+    >
+      {isTarget ? "Score" : "Target"}
+    </span>
+    {
+      /**
+       * TODO: this part should house some preview data such as:
+       * Darts (thrown)
+       * 3-darts avg.
+       * Previous score (if applicable)
+       * NOTE: This can vary per game type, so it should be a slot
+       */
+    }
+    <slot name="progress" />
+  </div>
+</div>

@@ -1,0 +1,40 @@
+---
+interface Props {
+  name: string;
+  rowsLabel: string;
+  href: string;
+  status: "live" | "idle";
+}
+
+const { name, rowsLabel, href, status } = Astro.props;
+const isLive = status === "live";
+---
+
+<li>
+  <a
+    href={href}
+    class="surface flex items-center gap-3 p-3.5 transition-colors duration-200 hover:border-border-strong"
+  >
+    <div
+      class:list={[
+        "flex size-9 shrink-0 items-center justify-center rounded-md ring-1",
+        isLive
+          ? "bg-accent-950 text-accent-400 ring-accent-800/50"
+          : "bg-bg-muted text-fg-muted ring-border",
+      ]}
+    >
+      <slot />
+    </div>
+    <div class="min-w-0 flex-1">
+      <p class="truncate text-sm font-medium">{name}</p>
+      <p class="text-xs text-fg-subtle">{rowsLabel}</p>
+    </div>
+    {
+      isLive ? (
+        <span class="badge badge-accent">Live</span>
+      ) : (
+        <span class="badge badge-muted">Idle</span>
+      )
+    }
+  </a>
+</li>

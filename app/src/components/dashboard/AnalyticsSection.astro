@@ -1,0 +1,20 @@
+---
+import DonutChart from "../charts/DonutChart.astro";
+import LineChartMinimal from "../charts/LineChartMinimal.astro";
+import LineChartFull from "../charts/LineChartFull.astro";
+import BarChart from "../charts/BarChart.astro";
+import PieChart from "../charts/PieChart.astro";
+---
+
+<section class="mb-6">
+  <h2 class="mb-3 text-sm font-medium text-fg-muted">Analytics</h2>
+  <div class="space-y-3">
+    <LineChartMinimal />
+    <div class="grid grid-cols-2 gap-3">
+      <DonutChart class="flex flex-col" />
+      <PieChart class="flex flex-col" />
+    </div>
+    <LineChartFull class="flex flex-col" />
+    <BarChart class="flex flex-col" />
+  </div>
+</section>

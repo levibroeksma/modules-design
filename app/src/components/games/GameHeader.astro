@@ -1,0 +1,43 @@
+---
+import ExitIcon from "../../icons/exit.svg";
+import ConfirmModal from "./ConfirmModal.astro";
+
+interface Props {
+  title: string;
+  exitTitle?: string;
+  exitMessage?: string;
+  exitHref?: string;
+}
+
+const {
+  title,
+  exitTitle = "Exit game?",
+  exitMessage = "Your progress won't be saved.",
+  exitHref = "/",
+} = Astro.props as Props;
+---
+
+<div x-data="{ open: false }">
+  <div
+    class="flex items-center justify-between p-3 text-center font-mono uppercase tracking-widest"
+  >
+    <button
+      type="button"
+      class="btn btn-ghost size-11 w-1/6 shrink-0 rounded-md p-0"
+      aria-label="Exit game"
+      @click="open = true"
+    >
+      <ExitIcon class="size-6 text-fg-subtle" />
+    </button>
+
+    <h3 class="font-mono text-base font-normal uppercase tracking-widest">{title}</h3>
+
+    <div class="w-1/6 shrink-0" aria-hidden="true"></div>
+  </div>
+
+  <ConfirmModal
+    title={exitTitle}
+    message={exitMessage}
+    confirmHref={exitHref}
+  />
+</div>

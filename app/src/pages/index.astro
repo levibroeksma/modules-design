@@ -1,0 +1,136 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AppShell from "../layouts/AppShell.astro";
+import DashboardHeader from "../components/dashboard/DashboardHeader.astro";
+import StatsGrid from "../components/dashboard/StatsGrid.astro";
+import QuickActions from "../components/dashboard/QuickActions.astro";
+import AnalyticsSection from "../components/dashboard/AnalyticsSection.astro";
+import TablesList from "../components/dashboard/TablesList.astro";
+import BottomNav from "../components/dashboard/BottomNav.astro";
+import PageIntro from "../components/ui/PageIntro.astro";
+import SearchField from "../components/ui/SearchField.astro";
+import NavItem from "../components/ui/NavItem.astro";
+
+const stats = [
+  {
+    label: "Database",
+    value: "12.4k",
+    hint: "+8.2% this week",
+    hintAccent: true,
+  },
+  {
+    label: "API requests",
+    value: "847",
+    hint: "last 24 hours",
+  },
+];
+
+const actions = [
+  { label: "New table", variant: "primary" as const },
+  { label: "SQL editor", variant: "secondary" as const },
+];
+
+const tables = [
+  {
+    name: "users",
+    rowsLabel: "4,281 rows",
+    href: "#",
+    status: "live" as const,
+  },
+  {
+    name: "orders",
+    rowsLabel: "1,092 rows",
+    href: "#",
+    status: "idle" as const,
+  },
+  {
+    name: "products",
+    rowsLabel: "328 rows",
+    href: "#",
+    status: "idle" as const,
+  },
+];
+---
+
+<BaseLayout title="Dashboard">
+  <AppShell>
+    <DashboardHeader
+      slot="header"
+      projectName="my-project"
+      planLabel="Free plan"
+    />
+
+    <div class="px-4 py-5">
+      <PageIntro
+        title="Overview"
+        description="Monitor your project at a glance."
+      />
+      <!-- <StatsGrid items={stats} /> -->
+      <!-- <QuickActions actions={actions} /> -->
+      <SearchField
+        id="search"
+        label="Search tables"
+        type="text"
+        placeholder="Search tables..."
+      />
+      <AnalyticsSection />
+      <!-- <TablesList countLabel="3 active" items={tables} /> -->
+    </div>
+
+    <BottomNav slot="nav">
+      <NavItem href="#" label="Home" active>
+        <svg
+          class="size-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          aria-hidden="true"
+        >
+          <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"
+          ></path><path d="M9 21V12h6v9"></path>
+        </svg>
+      </NavItem>
+      <NavItem href="#" label="Tables">
+        <svg
+          class="size-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          aria-hidden="true"
+        >
+          <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path
+            d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path
+            d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+        </svg>
+      </NavItem>
+      <NavItem href="#" label="SQL">
+        <svg
+          class="size-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          aria-hidden="true"
+        >
+          <path d="M16 18l6-6-6-6"></path><path d="M8 6l-6 6 6 6"></path>
+        </svg>
+      </NavItem>
+      <NavItem href="#" label="Settings">
+        <svg
+          class="size-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="3"></circle><path
+            d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"
+          ></path>
+        </svg>
+      </NavItem>
+    </BottomNav>
+  </AppShell>
+</BaseLayout>

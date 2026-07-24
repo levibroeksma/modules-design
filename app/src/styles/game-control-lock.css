@@ -1,0 +1,18 @@
+/* Hit-box lock only — do not set color, font-family, border, or box-shadow. */
+@layer components {
+  .game-control.btn {
+    min-height: 2.75rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    flex: 1 1 0%;
+    min-width: 0;
+    height: 100%;
+  }
+
+  .game-control.btn.p-0 {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}

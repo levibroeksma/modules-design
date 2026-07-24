@@ -1,0 +1,22 @@
+---
+import TabItem from "./TabItem.astro";
+
+const tabs = [
+  {
+    title: "Recreational",
+    href: "#productivity",
+  },
+  {
+    title: "Analytics",
+    href: "#engineering",
+  },
+];
+---
+
+<div class="tab-container w-fit" x-data="{ activeTab: 'recreational' }">
+  <div class="tab-wrapper">
+    <div class="tab-active-backdrop" style="--width: 107px; --offset: 20px;">
+    </div>
+    {tabs.map((tab) => <TabItem title={tab.title} href={tab.href} />)}
+  </div>
+</div>

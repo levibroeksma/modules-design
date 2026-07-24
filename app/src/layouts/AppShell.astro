@@ -1,0 +1,14 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+---
+
+<div class:list={["app-shell flex flex-1 h-screen", className]}>
+  <slot name="header" />
+  <main class="app-main p-4 flex flex-col gap-2 flex-1">
+    <slot />
+  </main>
+  <slot name="nav" />
+</div>

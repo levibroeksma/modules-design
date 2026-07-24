@@ -1,0 +1,75 @@
+---
+import UndoIcon from "../../icons/undo.svg";
+import InputButton from "./InputButton.astro";
+
+interface Props {
+  segment: number;
+}
+
+const { segment } = Astro.props;
+const labels = ["D1", "D2", "D3"] as const;
+---
+
+<div
+  class="flex flex-1 flex-col gap-3 p-3"
+  x-data={`{
+    segment: ${segment},
+    throws: [null, null, null],
+    record(kind) {
+      const index = this.throws.findIndex((value) => value === null);
+      if (index === -1) return;
+      this.throws[index] =
+        kind === 'miss' ? '-' : kind.toUpperCase() + String(this.segment);
+    },
+    undo() {
+      for (let index = this.throws.length - 1; index >= 0; index -= 1) {
+        if (this.throws[index] !== null) {
+          this.throws[index] = null;
+          return;
+        }
+      }
+    },
+  }`}
+>
+  <div class="flex h-16 items-center justify-evenly gap-3">
+    {
+      labels.map((label, index) => (
+        <div class="flex h-full min-w-12 flex-col items-center justify-center">
+          <span
+            class="font-mono text-4xl font-bold leading-none tabular-nums"
+            :class={`!throws[${index}] && 'text-fg-subtle'`}
+            x-text={`throws[${index}] ?? '${label}'`}
+          />
+          <span
+            class="mt-1 text-xs font-mono leading-none text-fg-subtle"
+            :class={`!throws[${index}] && 'invisible'`}
+          >
+            {label}
+          </span>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="glass flex flex-1 flex-col gap-3 p-3">
+    <div class="flex h-1/2 gap-2">
+      <InputButton class="p-0" aria-label={`Single ${segment}`} @click="record('s')">
+        <span>S{segment}</span>
+      </InputButton>
+      <InputButton class="p-0" aria-label={`Double ${segment}`} @click="record('d')">
+        <span>D{segment}</span>
+      </InputButton>
+      <InputButton class="p-0" aria-label={`Treble ${segment}`} @click="record('t')">
+        <span>T{segment}</span>
+      </InputButton>
+    </div>
+    <div class="flex h-1/2 gap-2">
+      <InputButton class="p-0" aria-label="Undo last dart" @click="undo()">
+        <UndoIcon class="size-6 text-fg-subtle" />
+      </InputButton>
+      <InputButton class="p-0" aria-label="Miss" @click="record('miss')">
+        <span>MISS</span>
+      </InputButton>
+    </div>
+  </div>
+</div>

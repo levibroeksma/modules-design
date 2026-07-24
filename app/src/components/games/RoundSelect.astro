@@ -1,0 +1,38 @@
+---
+import ChevronUpIcon from "../../icons/chevron-up.svg";
+import ChevronDownIcon from "../../icons/chevron-down.svg";
+
+interface Props {
+  class?: string;
+  [key: string]: any;
+}
+
+const { class: className, ...rest }: Props = Astro.props;
+---
+
+<div
+  class:list={[
+    "flex items-center gap-1 text-sm border bg-tab-card flex-col rounded-full border-x border-t border-tab-border",
+    className ?? "w-fit",
+  ]}
+  {...rest}
+>
+  <input type="number" min="1" class="sr-only" x-model.number="rounds" />
+  <label for="rounds" class="sr-only">Rounds</label>
+  <button
+    type="button"
+    class="px-2 py-1 flex items-center justify-center"
+    @click="incrementRounds"
+  >
+    <ChevronUpIcon class="size-8" />
+  </button>
+  <span class="text-3xl font-bold font-display text-accent" x-text="rounds"
+  ></span>
+  <button
+    type="button"
+    class="px-2 py-1 flex items-center justify-center"
+    @click="decrementRounds"
+  >
+    <ChevronDownIcon class="size-8" />
+  </button>
+</div>

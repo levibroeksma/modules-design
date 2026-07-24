@@ -1,0 +1,23 @@
+---
+interface Props {
+  class?: string;
+  type?: "button" | "submit" | "reset";
+}
+
+const {
+  class: className = "",
+  type = "button",
+  ...rest
+} = Astro.props as Props & Record<string, unknown>;
+---
+
+<button
+  type={type}
+  class:list={[
+    "game-control btn btn-secondary flex-1 basis-0 min-w-0 h-full font-semibold",
+    className,
+  ]}
+  {...rest}
+>
+  <slot />
+</button>

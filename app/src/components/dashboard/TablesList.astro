@@ -1,0 +1,48 @@
+---
+import TableListItem from "../ui/TableListItem.astro";
+
+interface TableItem {
+  name: string;
+  rowsLabel: string;
+  href: string;
+  status: "live" | "idle";
+}
+
+interface Props {
+  countLabel: string;
+  items: TableItem[];
+}
+
+const { countLabel, items } = Astro.props;
+---
+
+<section>
+  <div class="mb-3 flex items-center justify-between">
+    <h2 class="text-sm font-medium text-fg-muted">Tables</h2>
+    <span class="badge badge-muted">{countLabel}</span>
+  </div>
+  <ul class="space-y-2">
+    {
+      items.map((item) => (
+        <TableListItem
+          name={item.name}
+          rowsLabel={item.rowsLabel}
+          href={item.href}
+          status={item.status}
+        >
+          <svg
+            class="size-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+            <path d="M3 9h18M9 21V9"></path>
+          </svg>
+        </TableListItem>
+      ))
+    }
+  </ul>
+</section>

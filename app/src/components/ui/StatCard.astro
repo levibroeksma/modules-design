@@ -1,0 +1,27 @@
+---
+interface Props {
+  label: string;
+  value: string;
+  hint?: string;
+  hintAccent?: boolean;
+}
+
+const { label, value, hint, hintAccent = false } = Astro.props;
+---
+
+<div class="surface p-4">
+  <p class="text-xs font-medium text-fg-subtle">{label}</p>
+  <p class="mt-2 text-2xl font-semibold tabular-nums">{value}</p>
+  {
+    hint && (
+      <p
+        class:list={[
+          "mt-1 text-xs",
+          hintAccent ? "text-accent-400" : "text-fg-subtle",
+        ]}
+      >
+        {hint}
+      </p>
+    )
+  }
+</div>

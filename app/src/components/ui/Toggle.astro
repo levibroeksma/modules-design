@@ -1,0 +1,60 @@
+---
+import ToggleListItem from "./toggle/ToggleListItem.astro";
+
+interface ToggleOption {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  options: ToggleOption[];
+  orientation: "horizontal" | "vertical";
+  initial?: string;
+  class?: string;
+  [key: string]: any;
+}
+
+const {
+  options,
+  orientation,
+  initial,
+  class: className,
+  ...rest
+}: Props = Astro.props;
+const resolvedInitial = initial ?? options[0]?.value ?? "";
+const config = {
+  options,
+  orientation,
+  initial: resolvedInitial,
+};
+const n = options.length;
+const shellClass =
+  "relative grow w-full h-full rounded-tab border-x border-t border-tab-border bg-tab-card tab-wrapper p-2";
+const listClass = "relative z-1 grid h-full w-full items-stretch gap-3";
+const listStyle =
+  orientation === "horizontal"
+    ? `grid-template-columns: repeat(${n}, minmax(0, 1fr));`
+    : `grid-template-rows: repeat(${n}, minmax(0, 1fr));`;
+---
+
+<div
+  class:list={["tab-container", className ?? "w-fit"]}
+  x-data={`toggle(${JSON.stringify(config)})`}
+  x-modelable="activeTab"
+  {...rest}
+>
+  <div x-ref="list" class={shellClass}>
+    <div
+      class="pointer-events-none absolute left-0 top-0 z-0 rounded-tab-pill bg-tab-active backdrop-blur-[2px] transition-transform duration-tab ease-out"
+      :style="`width:${pill.w}px;height:${pill.h}px;transform:translate(${pill.x}px,${pill.y}px)`"
+    >
+    </div>
+    <ul class={listClass} style={listStyle}>
+      {
+        options.map((opt) => (
+          <ToggleListItem value={opt.value} label={opt.label} />
+        ))
+      }
+    </ul>
+  </div>
+</div>

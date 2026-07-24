@@ -1,0 +1,56 @@
+---
+import StopIcon from "../../icons/stop.svg";
+import UndoIcon from "../../icons/undo.svg";
+import InputButton from "./InputButton.astro";
+import InputDisplayItem from "./InputDisplayItem.astro";
+
+const displays = ["D1", "D2", "D3"];
+const multipliers = ["S", "D", "T"];
+const numberRows = [
+  [1, 2, 3, 4,5],
+  [ 6, 7, 8, 9, 10],
+  [ 11, 12, 13, 14, 15],
+  [ 16, 17, 18, 19, 20],
+];
+---
+<div class="p-3">
+  <div class="flex gap-3 p-3 glass">
+    {displays.map((display) => <InputDisplayItem value={display} />)}
+  </div>
+  <div
+    class="glass flex flex-1 flex-col gap-3 p-3  mt-3"
+    x-data="{ selectedMultiplier: 'S', selectedValue: null, answerArray: [] }"
+  >
+  
+    <div class="flex gap-3">
+      {
+        multipliers.map((multiplier) => (
+          <InputButton
+            :class={`selectedMultiplier === '${multiplier}' && 'bg-accent text-accent-foreground border-accent-500'`}
+            :aria-pressed={`selectedMultiplier === '${multiplier}'`}
+            @click={`selectedMultiplier = '${multiplier}'`}
+          >
+            {multiplier}
+          </InputButton>
+        ))
+      }
+    </div>
+  
+    {
+      numberRows.map((row) => (
+        <div class="flex gap-1.5">
+          {row.map((value) => <InputButton>{value}</InputButton>)}
+        </div>
+      ))
+    }
+    <div class="flex gap-1.5">
+      <InputButton class="p-0">
+        <UndoIcon class="size-6 text-fg-subtle" />
+      </InputButton>
+      <InputButton>Bull</InputButton>
+      <InputButton class="p-0">
+        <StopIcon class="size-6 text-fg-subtle" />
+      </InputButton>
+    </div>
+  </div>
+</div>

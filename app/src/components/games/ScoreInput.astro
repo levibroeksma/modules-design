@@ -1,0 +1,73 @@
+---
+import DeleteIcon from "../../icons/delete.svg";
+import UndoIcon from "../../icons/undo.svg";
+import InputButton from "./InputButton.astro";
+
+const numberRows = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+];
+---
+
+<div
+  class="flex flex-1 flex-col gap-3 p-2"
+  x-data="{
+    score: '',
+    appendDigit(digit) {
+      const next = this.score === '0' ? String(digit) : this.score + String(digit);
+      if (next.length > 3) return;
+      this.score = next;
+    },
+    deleteLast() {
+      this.score = this.score.slice(0, -1);
+    },
+    clearScore() {
+      this.score = '';
+    },
+  }"
+>
+  <div class="flex items-center gap-3">
+    <div
+      class="glass-strong flex min-h-11 flex-1 items-center justify-center rounded-lg px-4"
+    >
+      <span
+        class="text-4xl font-mono font-bold tabular-nums"
+        :class="!score && 'text-fg-subtle'"
+        x-text="score || '0'"></span>
+    </div>
+    <button
+      type="button"
+      class="btn btn-primary shrink-0 rounded-md px-5 disabled:pointer-events-none disabled:opacity-40"
+      :disabled="!score"
+    >
+      Submit
+    </button>
+  </div>
+
+  <div class="glass flex flex-1 flex-col gap-1.5 p-3 w-full">
+    {
+      numberRows.map((row) => (
+        <div class="flex flex-1 min-h-0 gap-1.5 w-full">
+          {row.map((value) => (
+            <InputButton x-on:click={`appendDigit(${value})`}>
+              {value}
+            </InputButton>
+          ))}
+        </div>
+      ))
+    }
+    <div class="flex gap-2 flex-1 min-h-0 w-full">
+      <InputButton class="flex justify-center items-center">
+        <UndoIcon class="size-6 text-fg-subtle" />
+      </InputButton>
+      <InputButton @click="appendDigit(0)">0</InputButton>
+      <InputButton
+        @click="deleteLast()"
+        class="flex justify-center items-center"
+      >
+        <DeleteIcon class="size-6 text-fg-subtle" />
+      </InputButton>
+    </div>
+  </div>
+</div>

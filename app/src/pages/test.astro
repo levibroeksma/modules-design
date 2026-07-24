@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AppShell from "../layouts/AppShell.astro";
+import FiveOhOneConfig from "../components/games/config/FiveOhOneConfig.astro";
+---
+
+<BaseLayout title="Toggle demo">
+  <AppShell>
+    <div class="flex flex-col gap-6 w-full flex-1 p-2">
+      <FiveOhOneConfig />
+    </div>
+  </AppShell>
+</BaseLayout>

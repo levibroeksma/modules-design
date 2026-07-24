@@ -1,0 +1,21 @@
+---
+interface Props {
+  value: string;
+  label: string;
+  [key: string]: any;
+}
+const { value, label, ...props }: Props = Astro.props;
+---
+
+<li
+  class="min-w-0 min-h-10 w-full h-full p-2 rounded-full flex items-center justify-center cursor-pointer"
+  data-toggle-value={value}
+  :class={`activeTab === '${value}' ? 'text-accent' : 'text-fg-muted'`}
+  @click={`select('${value}')`}
+  {...props}
+>
+  <input type="radio" id={value} value={value} class="hidden peer" />
+  <label for={value} class="w-full">
+    <div class="w-full font-medium mb-1 text-center">{label}</div>
+  </label>
+</li>
